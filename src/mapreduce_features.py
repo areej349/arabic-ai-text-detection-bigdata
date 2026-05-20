@@ -4,8 +4,6 @@ MSBDA-801 Big Data Analytics
 MapReduce Conceptual Design & Implementation
 for 5 Assigned Stylometric Features
 =============================================================
-Student : اريج عبدالعزيز بن حمدان الشاماني  (i=3, n=21)
-
 Assigned Features:
   f3  → Number of digits / C
   f24 → Number of different punctuation signs / C
