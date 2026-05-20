@@ -1,0 +1,155 @@
+nohup: ignoring input
+26/05/17 08:30:11 WARN Utils: Your hostname, Areej resolves to a loopback address: 127.0.0.1; using 192.168.8.82 instead (on interface enp0s3)
+26/05/17 08:30:11 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/05/17 08:30:12 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 1:=============================>                             (1 + 1) / 2]                                                                                [Stage 11:=============================>                            (1 + 1) / 2]26/05/17 08:30:23 WARN GarbageCollectionMetrics: To enable non-built-in garbage collector(s) List(G1 Concurrent GC), users should configure it(them) to spark.eventLog.gcMetrics.youngGenerationGarbageCollectors or spark.eventLog.gcMetrics.oldGenerationGarbageCollectors
+                                                                                [Stage 12:=============================>                            (1 + 1) / 2]                                                                                [Stage 16:=============================>                            (1 + 1) / 2]                                                                                [Stage 27:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:30:40 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.JNIBLAS
+26/05/17 08:30:40 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.blas.VectorBLAS
+[Stage 28:=============================>                            (1 + 1) / 2]                                                                                [Stage 77:=============================>                            (1 + 1) / 2]                                                                                [Stage 79:=============================>                            (1 + 1) / 2]                                                                                [Stage 85:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:30:56 WARN DAGScheduler: Broadcasting large task binary with size 1027.3 KiB
+[Stage 87:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:30:57 WARN DAGScheduler: Broadcasting large task binary with size 1215.4 KiB
+[Stage 89:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:30:58 WARN DAGScheduler: Broadcasting large task binary with size 1459.1 KiB
+[Stage 91:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:30:59 WARN DAGScheduler: Broadcasting large task binary with size 1771.8 KiB
+[Stage 93:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:31:00 WARN DAGScheduler: Broadcasting large task binary with size 2.1 MiB
+[Stage 95:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:31:01 WARN DAGScheduler: Broadcasting large task binary with size 2.5 MiB
+[Stage 97:=============================>                            (1 + 1) / 2]                                                                                26/05/17 08:31:03 WARN DAGScheduler: Broadcasting large task binary with size 1577.7 KiB
+26/05/17 08:31:03 WARN DAGScheduler: Broadcasting large task binary with size 1577.7 KiB
+26/05/17 08:31:04 WARN DAGScheduler: Broadcasting large task binary with size 1577.7 KiB
+26/05/17 08:31:04 WARN DAGScheduler: Broadcasting large task binary with size 1577.7 KiB
+26/05/17 08:31:04 WARN DAGScheduler: Broadcasting large task binary with size 1565.9 KiB
+[Stage 192:>                                                        (0 + 2) / 2][Stage 192:============================>                            (1 + 1) / 2]                                                                                [INFO] Spark: 3.5.1
+
+╔══════════════════════════════════════════════════════════╗
+║       ASSIGNED STYLOMETRIC FEATURES  (i=3, n=21)        ║
+╠══════════════════════════════════════════════════════════╣
+║  f3  → Number of digits / C                             ║
+║  f24 → Number of different punctuation signs / C        ║
+║  f45 → Number of adjectives (pattern-based)             ║
+║  f66 → Number of genitives                              ║
+║  f87 → Gini Coefficient of Word Frequencies             ║
+╠══════════════════════════════════════════════════════════╣
+║  Input: features_extracted.parquet (pre-computed)       ║
+╚══════════════════════════════════════════════════════════╝
+
+[TASK 3.1] Loading pre-computed features from features_extracted.parquet...
+  Rows loaded: 41,940
+  Columns    : ['text', 'clean_text', 'label', 'f3_digits_ratio', 'f24_punct_div', 'f45_adj_count', 'f66_genitive_count', 'f87_gini']
+root
+ |-- text: string (nullable = true)
+ |-- clean_text: string (nullable = true)
+ |-- label: double (nullable = true)
+ |-- f3_digits_ratio: double (nullable = true)
+ |-- f24_punct_div: double (nullable = true)
+ |-- f45_adj_count: double (nullable = true)
+ |-- f66_genitive_count: double (nullable = true)
+ |-- f87_gini: double (nullable = true)
+
+
+  Label distribution:
++-----+-----+
+|label|count|
++-----+-----+
+|  0.0| 8388|
+|  1.0|33552|
++-----+-----+
+
+  Sample — 5 assigned features (from pre-computed file):
++-----+--------------------+--------------------+-------------+------------------+-------------------+
+|label|     f3_digits_ratio|       f24_punct_div|f45_adj_count|f66_genitive_count|           f87_gini|
++-----+--------------------+--------------------+-------------+------------------+-------------------+
+|  0.0|                 0.0|0.005610098176718092|          7.0|              11.0|0.14915966386554613|
+|  0.0|                 0.0|0.002421307506053269|         13.0|              15.0|0.19961288711288705|
+|  0.0|0.009015777610818933|0.004507888805409466|         17.0|              22.0| 0.2107496463932106|
+|  0.0|                 0.0|0.002954209748892...|          3.0|              14.0|0.18771929824561417|
+|  0.0| 0.02283653846153846|0.004807692307692308|          9.0|              12.0|0.12010630023334201|
++-----+--------------------+--------------------+-------------+------------------+-------------------+
+only showing top 5 rows
+
+  Feature statistics per label:
++-----+--------------------+--------------------+-----------------+------------------+-------------------+
+|label|              avg_f3|             avg_f24|          avg_f45|           avg_f66|            avg_f87|
++-----+--------------------+--------------------+-----------------+------------------+-------------------+
+|  0.0|0.003041429937157...|0.004474505335132322|6.192656175488794|11.886504530281353|0.16533729385046192|
+|  1.0|0.002219034582026...|0.004135036798284539|5.302515498330949|11.761087267525037|0.17952493586975937|
++-----+--------------------+--------------------+-----------------+------------------+-------------------+
+
+
+[TASK 3.2] Computing TF-IDF features (5000-dim)...
+  Using column: 'clean_text' for TF-IDF
+  TF-IDF (5000-dim) computed.
+  Assembling feature vector: TF-IDF(5000) + f3 + f24 + f45 + f66 + f87
+  Final dataset: 41,940 rows
+  Feature vector dimensions: 5000 (TF-IDF) + 5 (stylometric) = 5005
+
+[TASK 3.3] Splitting data 70 / 15 / 15 (no data leakage)...
+  Train : 29,438 rows (70%)
+  Val   : 6,199 rows (15%)
+  Test  : 6,303 rows (15%)
+
+[TASK 3.4] Baseline: Logistic Regression...
+
+  [Logistic Regression (Baseline)]
+    Accuracy  : 0.9791
+    Precision : 0.9795
+    Recall    : 0.9791
+    F1-Score  : 0.9792
+    ROC-AUC   : 0.9947
+  Model saved: /home/hadoop/bigdata_project/models/lr_model
+
+[TASK 3.5a] Advanced Model 1: Random Forest...
+
+  [Random Forest]
+    Accuracy  : 0.8133
+    Precision : 0.8465
+    Recall    : 0.8133
+    F1-Score  : 0.7420
+    ROC-AUC   : 0.9792
+  Model saved: /home/hadoop/bigdata_project/models/rf_model
+
+  >> Feature Importances (5 assigned features):
+    f3_digits_ratio          : 0.000534
+    f24_punct_div            : 0.001569
+    f45_adj_count            : 0.002301
+    f66_genitive_count       : 0.001687
+    f87_gini                 : 0.001347
+  Plot saved: /home/hadoop/bigdata_project/reports/figures/rf_feature_importance.png
+
+[TASK 3.5b] Advanced Model 2: Linear SVM...
+
+  [Linear SVM]
+    Accuracy  : 0.9733
+    Precision : 0.9739
+    Recall    : 0.9733
+    F1-Score  : 0.9735
+    ROC-AUC   : 0.9935
+  Model saved: /home/hadoop/bigdata_project/models/svm_model
+
+======================================================================
+  MODEL COMPARISON — TEST SET
+  Input: features_extracted.parquet → TF-IDF(5000) + 5 features
+======================================================================
+  Model                                   Acc    Prec     Rec      F1     AUC
+  -------------------------------------------------------------------
+  Logistic Regression (Baseline)       0.9791  0.9795  0.9791  0.9792  0.9947
+  Random Forest                        0.8133  0.8465  0.8133  0.7420  0.9792
+  Linear SVM                           0.9733  0.9739  0.9733  0.9735  0.9935
+======================================================================
+  Best model (F1): Logistic Regression (Baseline)  →  F1 = 0.9792
+  Chart saved: /home/hadoop/bigdata_project/reports/figures/model_comparison_phase3.png
+  Results CSV: /home/hadoop/bigdata_project/reports/model_results_phase3.csv
+
+[MapReduce Sim] Hapax Legomena Ratio...
+  Total tokens : 3,752,645
+  Hapax words  : 9,772
+  Hapax ratio  : 0.0026
+
+======================================================================
+  PHASE 3 COMPLETED SUCCESSFULLY!
+======================================================================
+  Input          : features_extracted.parquet (41,940 rows)
+  Feature vector : TF-IDF(5000) + 5 assigned features = 5005 dims
+  Best model     : Logistic Regression (Baseline)  F1=0.9792
+  Models saved   : /home/hadoop/bigdata_project/models
+  Results CSV    : /home/hadoop/bigdata_project/reports/model_results_phase3.csv
+======================================================================

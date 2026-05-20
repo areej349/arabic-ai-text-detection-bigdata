@@ -1,0 +1,411 @@
+26/05/16 17:49:39 WARN Utils: Your hostname, Areej resolves to a loopback address: 127.0.0.1; using 192.168.8.82 instead (on interface enp0s3)
+26/05/16 17:49:39 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/05/16 17:49:40 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 0:>                                                          (0 + 0) / 1][Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 1:>                                                          (0 + 2) / 2]                                                                                26/05/16 17:49:57 WARN GarbageCollectionMetrics: To enable non-built-in garbage collector(s) List(G1 Concurrent GC), users should configure it(them) to spark.eventLog.gcMetrics.youngGenerationGarbageCollectors or spark.eventLog.gcMetrics.oldGenerationGarbageCollectors
+[Stage 4:>                                                          (0 + 1) / 1]                                                                                [Stage 5:>                                                          (0 + 2) / 2][Stage 5:=============================>                             (1 + 1) / 2]                                                                                [Stage 6:>                                                          (0 + 2) / 2][Stage 6:=============================>                             (1 + 1) / 2]                                                                                [Stage 7:>                                                          (0 + 2) / 2][Stage 7:=============================>                             (1 + 1) / 2]                                                                                [Stage 10:>                                                         (0 + 2) / 2][Stage 10:=============================>                            (1 + 1) / 2][Stage 12:>                                                         (0 + 2) / 2]                                                                                [Stage 13:>                                                         (0 + 1) / 1]                                                                                [Stage 14:>                                                         (0 + 1) / 1]                                                                                [Stage 15:>                                                         (0 + 2) / 2][Stage 15:=============================>                            (1 + 1) / 2]                                                                                [Stage 17:=============================>                            (1 + 1) / 2]                                                                                [Stage 21:>                                                         (0 + 2) / 2]                                                                                [Stage 23:=============================>                            (1 + 1) / 2]                                                                                [Stage 25:>                                                         (0 + 2) / 2][Stage 28:>                                                         (0 + 1) / 1]                                                                                [Stage 29:>                                                         (0 + 2) / 2][Stage 29:=============================>                            (1 + 1) / 2]26/05/16 17:54:17 ERROR ArrowPythonRunner: Python worker exited unexpectedly (crashed)
+org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/python/lib/pyspark.zip/pyspark/worker.py", line 1225, in main
+    eval_type = read_int(infile)
+                ^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/python/lib/pyspark.zip/pyspark/serializers.py", line 596, in read_int
+    raise EOFError
+EOFError
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+	at org.apache.spark.sql.execution.python.PythonArrowOutput$$anon$1.read(PythonArrowOutput.scala:118)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:491)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage3.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.ContextAwareIterator.hasNext(ContextAwareIterator.scala:39)
+	at org.apache.spark.api.python.SerDeUtil$AutoBatchedPickler.hasNext(SerDeUtil.scala:86)
+	at scala.collection.Iterator.foreach(Iterator.scala:943)
+	at scala.collection.Iterator.foreach$(Iterator.scala:943)
+	at org.apache.spark.api.python.SerDeUtil$AutoBatchedPickler.foreach(SerDeUtil.scala:80)
+	at org.apache.spark.api.python.PythonRDD$.writeIteratorToStream(PythonRDD.scala:322)
+	at org.apache.spark.api.python.PythonRunner$$anon$2.writeIteratorToStream(PythonRunner.scala:751)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+Caused by: java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	... 3 more
+26/05/16 17:54:17 ERROR ArrowPythonRunner: This may have been caused by a prior exception:
+java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+26/05/16 17:54:17 ERROR PythonRunner: Python worker exited unexpectedly (crashed)
+org.apache.spark.api.python.PythonException: Traceback (most recent call last):
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/python/lib/pyspark.zip/pyspark/worker.py", line 1225, in main
+    eval_type = read_int(infile)
+                ^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/python/lib/pyspark.zip/pyspark/serializers.py", line 596, in read_int
+    raise EOFError
+EOFError
+
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.handlePythonException(PythonRunner.scala:572)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:784)
+	at org.apache.spark.api.python.PythonRunner$$anon$3.read(PythonRunner.scala:766)
+	at org.apache.spark.api.python.BasePythonRunner$ReaderIterator.hasNext(PythonRunner.scala:525)
+	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:37)
+	at scala.collection.Iterator$GroupedIterator.fill(Iterator.scala:1211)
+	at scala.collection.Iterator$GroupedIterator.hasNext(Iterator.scala:1217)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:140)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:104)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+26/05/16 17:54:17 ERROR PythonRunner: This may have been caused by a prior exception:
+java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+26/05/16 17:54:17 ERROR Executor: Exception in task 0.0 in stage 29.0 (TID 31)
+java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+26/05/16 17:54:17 WARN TaskSetManager: Lost task 0.0 in stage 29.0 (TID 31) (192.168.8.82 executor driver): java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+
+26/05/16 17:54:17 ERROR TaskSetManager: Task 0 in stage 29.0 failed 1 times; aborting job
+Installing python-bidi...
+[INFO] Spark started. Version: 3.5.1
+
+[TASK 2.1] Loading data from Phase 1 Parquet...
+  Rows: 41940
+root
+ |-- text: string (nullable = true)
+ |-- label: integer (nullable = true)
+
+  Applying preprocessing pipeline (normalize → stopwords → stem)...
+  Sample (original vs clean):
++----------------------------------------------------------------------+----------------------------------------------------------------------+
+|                                                              original|                                                            clean_text|
++----------------------------------------------------------------------+----------------------------------------------------------------------+
+|كثيرا ما ارتبطت المصادر التاريخية في الأندلس خاصة منها كتب التراجم ...|ثيرا ارتبطت مصادر تاريخيه اندلس خاصه منها كتب تراجم فهرس برامج غير ...|
+|يعد العامل الثقافي احد ابرز الاسباب التي يعزى لها سقوط الدولة الموح...|يعد عامل ثقافي احد ابرز اسباب يعزي قوط دوله موحديه حتي انه ايقل حيث...|
+|شكلت تلك الجهود والمساعي الرائدة التي قام بها قادة الثورة خلال مرحل...|شكلت تلك جهود مساعي رائده قام بها قاده ثوره مرحلت اولي بحث مصادر تم...|
++----------------------------------------------------------------------+----------------------------------------------------------------------+
+only showing top 3 rows
+
+
+[TASK 2.2] Saving processed data...
+  Parquet saved : /home/hadoop/bigdata_project/data/processed/processed_abstracts.parquet
+  ORC saved     : /home/hadoop/bigdata_project/data/processed/processed_abstracts.orc
+
+[TASK 2.3] EDA on processed data...
+
+  >> Top 20 Unigrams (after preprocessing):
++--------+------+
+|    word| count|
++--------+------+
+|     علي|102309|
+|     الي| 77732|
+|   دراسه| 56578|
+|     بحث| 42841|
+|      ان| 38475|
+|   تحليل| 22672|
+|     حيث| 17066|
+|   تاثير| 16477|
+|   نتائج| 16400|
+|   تعزيز| 16143|
+|     فهم| 14563|
+|     مما| 14462|
+| استخدام| 14043|
+|   تحقيق| 13774|
+|    تهدف| 13298|
+|   اهميه| 13260|
+|     دور| 13107|
+|     ضوء| 11051|
+|اجتماعيه| 10575|
+|   تركيز| 10295|
++--------+------+
+only showing top 20 rows
+
+
+  >> Type-Token Ratio (TTR) per label:
+    Label 1 (AI): tokens=2,921,194, types=40,429, TTR=0.0138
+    Label 0 (Human): tokens=831,451, types=30,092, TTR=0.0362
+
+  >> Top 15 Bigrams (on 1000-row sample):
+    دراسه الي: 124
+    لغه عربيه: 124
+    مشرع جزائري: 77
+    ضوء علي: 76
+    ورقه بحثيه: 70
+    علي مستوي: 68
+    الي ان: 68
+    تهدف دراسه: 63
+    اضافه الي: 59
+    الا ان: 54
+    يمكن ان: 52
+    وقوف علي: 46
+    كلم مفتاحيه: 45
+    قران كريم: 45
+    عمليه تعليميه: 45
+
+  >> Generating word cloud...
+  Word cloud saved: /home/hadoop/bigdata_project/reports/figures/wordcloud_phase2.png
+
+[MapReduce Sim 1] Word Count...
+  Total tokens (M/R): 3,752,645
+  Top 10 words:
++-----+------+
+| word| count|
++-----+------+
+|  علي|102309|
+|  الي| 77732|
+|دراسه| 56578|
+|  بحث| 42841|
+|   ان| 38475|
+|تحليل| 22672|
+|  حيث| 17066|
+|تاثير| 16477|
+|نتائج| 16400|
+|تعزيز| 16143|
++-----+------+
+only showing top 10 rows
+
+  Saved: /home/hadoop/bigdata_project/data/processed/mr_word_count.parquet
+
+[MapReduce Sim 2] Bigram Frequency...
+Traceback (most recent call last):
+  File "/home/hadoop/bigdata_project/phase2_preprocessing.py", line 259, in <module>
+    .toDF(["bigram", "count"]) \
+     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 122, in toDF
+    return sparkSession.createDataFrame(self, schema, sampleRatio)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 1443, in createDataFrame
+    return self._create_dataframe(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 1483, in _create_dataframe
+    rdd, struct = self._createFromRDD(data.map(prepare), schema, samplingRatio)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 1056, in _createFromRDD
+    struct = self._inferSchema(rdd, samplingRatio, names=schema)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 996, in _inferSchema
+    first = rdd.first()
+            ^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/rdd.py", line 2888, in first
+    rs = self.take(1)
+         ^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/rdd.py", line 2855, in take
+    res = self.context.runJob(self, takeUpToNumLeft, p)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/context.py", line 2510, in runJob
+    sock_info = self._jvm.PythonRDD.runJob(self._jsc.sc(), mappedRDD._jrdd, partitions)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 179, in deco
+    return f(*a, **kw)
+           ^^^^^^^^^^^
+  File "/home/hadoop/.local/lib/python3.12/site-packages/py4j/protocol.py", line 326, in get_return_value
+    raise Py4JJavaError(
+py4j.protocol.Py4JJavaError: An error occurred while calling z:org.apache.spark.api.python.PythonRDD.runJob.
+: org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 29.0 failed 1 times, most recent failure: Lost task 0.0 in stage 29.0 (TID 31) (192.168.8.82 executor driver): java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+
+Driver stacktrace:
+	at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2856)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2792)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2791)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2791)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1247)
+	at scala.Option.foreach(Option.scala:407)
+	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1247)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:3060)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2994)
+	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2983)
+	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)
+	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:989)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2398)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2419)
+	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2438)
+	at org.apache.spark.api.python.PythonRDD$.runJob(PythonRDD.scala:181)
+	at org.apache.spark.api.python.PythonRDD.runJob(PythonRDD.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:75)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:52)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.UnsupportedOperationException: sun.misc.Unsafe or java.nio.DirectByteBuffer.<init>(long, int) not available
+	at org.apache.arrow.memory.util.MemoryUtil.directBuffer(MemoryUtil.java:174)
+	at org.apache.arrow.memory.ArrowBuf.getDirectBuffer(ArrowBuf.java:229)
+	at org.apache.arrow.memory.ArrowBuf.nioBuffer(ArrowBuf.java:224)
+	at org.apache.arrow.vector.ipc.WriteChannel.write(WriteChannel.java:133)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.writeBatchBuffers(MessageSerializer.java:303)
+	at org.apache.arrow.vector.ipc.message.MessageSerializer.serialize(MessageSerializer.java:276)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeRecordBatch(ArrowWriter.java:147)
+	at org.apache.arrow.vector.ipc.ArrowWriter.writeBatch(ArrowWriter.java:133)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream(PythonArrowInput.scala:140)
+	at org.apache.spark.sql.execution.python.BasicPythonArrowInput.writeIteratorToArrowStream$(PythonArrowInput.scala:124)
+	at org.apache.spark.sql.execution.python.ArrowPythonRunner.writeIteratorToArrowStream(ArrowPythonRunner.scala:30)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.$anonfun$writeIteratorToStream$1(PythonArrowInput.scala:96)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.sql.execution.python.PythonArrowInput$$anon$1.writeIteratorToStream(PythonArrowInput.scala:102)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.$anonfun$run$1(PythonRunner.scala:451)
+	at org.apache.spark.util.Utils$.logUncaughtExceptions(Utils.scala:1928)
+	at org.apache.spark.api.python.BasePythonRunner$WriterThread.run(PythonRunner.scala:282)
+

@@ -1,0 +1,91 @@
+26/05/16 17:48:49 WARN Utils: Your hostname, Areej resolves to a loopback address: 127.0.0.1; using 192.168.8.82 instead (on interface enp0s3)
+26/05/16 17:48:49 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/05/16 17:48:50 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 1:>                                                          (0 + 1) / 1]                                                                                [Stage 2:>                                                          (0 + 1) / 1]                                                                                [Stage 5:>                                                          (0 + 1) / 1]                                                                                [Stage 8:>                                                          (0 + 1) / 1]26/05/16 17:49:11 WARN GarbageCollectionMetrics: To enable non-built-in garbage collector(s) List(G1 Concurrent GC), users should configure it(them) to spark.eventLog.gcMetrics.youngGenerationGarbageCollectors or spark.eventLog.gcMetrics.oldGenerationGarbageCollectors
+                                                                                [Stage 9:>                                                          (0 + 1) / 1]                                                                                [Stage 13:>                                                         (0 + 1) / 1]                                                                                [Stage 16:>                                                         (0 + 1) / 1]                                                                                [Stage 19:>                                                         (0 + 1) / 1]                                                                                [Stage 22:>                                                         (0 + 1) / 1]                                                                                
+[TASK 1.1] Creating project directory structure...
+  OK: /home/hadoop/bigdata_project/data/raw
+  OK: /home/hadoop/bigdata_project/data/processed
+  OK: /home/hadoop/bigdata_project/notebooks
+  OK: /home/hadoop/bigdata_project/src
+  OK: /home/hadoop/bigdata_project/models
+  OK: /home/hadoop/bigdata_project/reports/figures
+  OK: /home/hadoop/bigdata_project/reports/presentations
+  .gitignore & requirements.txt created.
+
+[TASK 1.2] Starting PySpark environment...
+  Spark version       : 3.5.1
+  Master              : local[*]
+  Default parallelism : 2
+
+[TASK 1.3] Loading dataset from local CSV...
+  Rows loaded  : 41940
+  Columns      : ['text', 'label']
+root
+ |-- text: string (nullable = true)
+ |-- label: integer (nullable = true)
+
+  Rows after cleaning: 41940
+  Saved Parquet : /home/hadoop/bigdata_project/data/raw/raw_abstracts.parquet
+
+[TASK 1.4] Initial EDA using Spark DataFrames...
+
+  Total samples : 41940
+
+  >> Sample rows (3):
++--------------------------------------------------------------------------------+-----+
+|                                                                            text|label|
++--------------------------------------------------------------------------------+-----+
+|كثيرا ما ارتبطت المصادر التاريخية في الأندلس خاصة منها كتب التراجم والفهرسات ...|    0|
+|يعد العامل الثقافي احد ابرز الاسباب التي يعزى لها سقوط الدولة الموحدية ، حتى ...|    0|
+|شكلت تلك الجهود والمساعي الرائدة التي قام بها قادة الثورة خلال مرحلتها الأولى...|    0|
++--------------------------------------------------------------------------------+-----+
+only showing top 3 rows
+
+
+  >> Label distribution  (0=Human, 1=AI):
++-----+-------+
+|label|samples|
++-----+-------+
+|    0|   8388|
+|    1|  33552|
++-----+-------+
+
+
+  >> Text length statistics (characters):
++-------+-----------------+
+|summary|         char_len|
++-------+-----------------+
+|  count|            41940|
+|   mean|671.7419408679066|
+| stddev|257.1769005528532|
+|    min|              170|
+|    max|            18459|
++-------+-----------------+
+
+
+  >> Null / empty value counts:
++---------+----------+
+|null_text|null_label|
++---------+----------+
+|        0|         0|
++---------+----------+
+
+
+  >> Average text length per label:
++-----+---------+-----------------+------------------+
+|label|n_samples|        avg_chars|         std_chars|
++-----+---------+-----------------+------------------+
+|    0|     8388|740.3141392465427|226.58718231951477|
+|    1|    33552|654.5988912732475| 261.4798001899697|
++-----+---------+-----------------+------------------+
+
+
+============================================================
+  PHASE 1 COMPLETED SUCCESSFULLY!
+============================================================
+  Project root : /home/hadoop/bigdata_project
+  Raw Parquet  : /home/hadoop/bigdata_project/data/raw/raw_abstracts.parquet
+============================================================

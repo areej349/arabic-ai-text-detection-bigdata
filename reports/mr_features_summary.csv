@@ -1,0 +1,6 @@
+feature,description,human_mean,ai_mean,difference
+f3_digits_ratio,f3  - digits/C,0.003041,0.002219,-0.000822
+f24_punct_div,f24 - punct/C,0.004475,0.004135,-0.00034
+f45_adj_count,f45 - adjectives,6.192656,5.302515,-0.890141
+f66_genitive_count,f66 - genitives,11.886505,11.761087,-0.125418
+f87_gini,f87 - Gini coeff,0.165337,0.179525,0.014188
